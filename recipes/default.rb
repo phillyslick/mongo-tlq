@@ -25,6 +25,7 @@ template '/etc/init/mongodb.conf' do
   group 'root'
   mode '0700'
   source 'mongodb_upstart.conf.erb'
+  notifies :run, "execute[restart-mongo]", :immediately
 end
 
 template '/etc/mongodb.conf' do
@@ -32,8 +33,11 @@ template '/etc/mongodb.conf' do
   group 'mongodb'
   mode '0700'
   source 'mongodb.conf.erb'
+  notifies :run, "execute[restart-mongo]", :immediately
 end
 
-execute 'service mongodb restart'
-
+execute "restart-mongo" do
+  command  'service mongodb restart'
+  action :nothing
+end
 
