@@ -1,0 +1,1 @@
+default[:mongo][:data_directory] = "/data/db"

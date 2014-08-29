@@ -3,6 +3,8 @@
 # from source because it makes updating a pain. Use the
 # 10gen debs as they're generally up to date.
 
+data_directory = node[:mongo][:data_directory]
+
 file "/etc/apt/sources.list.d/10gen.list" do
   owner 'root'
   group 'root'
@@ -20,6 +22,12 @@ end
 
 package 'mongodb-10gen'
 
+directory data_directory do
+  owner 'root'
+  group 'root'
+  recursive true
+end
+
 template '/etc/init/mongodb.conf' do
   owner 'root'
   group 'root'
@@ -34,13 +42,6 @@ template '/etc/mongodb.conf' do
   mode '0700'
   source 'mongodb.conf.erb'
   notifies :run, "execute[restart-mongo]", :immediately
-end
-
-bash "Create data directory" do
-  user 'root'
-  code <<-EOC
-    mkdir /data/db/
-  EOC
 end
 
 execute "restart-mongo" do
