@@ -25,7 +25,7 @@ package 'mongodb-10gen'
 directory data_directory do
   owner 'mongodb'
   group "mongodb"
-  mode '0755'
+  mode '0777'
   recursive true
 end
 
