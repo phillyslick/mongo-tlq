@@ -23,8 +23,7 @@ end
 package 'mongodb-10gen'
 
 directory data_directory do
-  owner 'root'
-  group 'root'
+  owner 'mongodb'
   recursive true
 end
 
