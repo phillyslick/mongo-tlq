@@ -36,6 +36,13 @@ template '/etc/mongodb.conf' do
   notifies :run, "execute[restart-mongo]", :immediately
 end
 
+bash "Create data directory" do
+  user 'root'
+  code <<-EOC
+    mkdir /data/db/
+  EOC
+end
+
 execute "restart-mongo" do
   command  'service mongodb restart'
   action :nothing
