@@ -20,6 +20,10 @@ bash "Adding 10gen mongo source"  do
   EOC
 end
 
+package 'mongodb-clients' do
+  action :remove
+end
+
 package 'mongodb-10gen'
 
 directory data_directory do
