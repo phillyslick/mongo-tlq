@@ -3,11 +3,6 @@
 # from source because it makes updating a pain. Use the
 # 10gen debs as they're generally up to date.
 
-package 'mongodb-clients' do
-  action :remove
-end
-
-
 data_directory = node[:mongo][:data_directory]
 
 file "/etc/apt/sources.list.d/10gen.list" do
@@ -25,7 +20,7 @@ bash "Adding 10gen mongo source"  do
   EOC
 end
 
-
+asdasds
 
 package 'mongodb-10gen'
 
